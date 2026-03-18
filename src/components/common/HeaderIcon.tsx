@@ -1,20 +1,16 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { useTranslation } from 'react-i18next';
 
 import Icon from '@assets/Icon';
 
 const HeaderIcon: React.FC = () => {
-  const {
-    i18n: { language },
-  } = useTranslation();
-  const { colors } = useTheme();
+  const { colors, dark } = useTheme();
 
   return (
     <View style={styles.container}>
       <Icon
-        name={`provider-logo-${language}`}
+        name={dark ? 'provider-logo-dark' : 'provider-logo-light'}
         style={{ color: colors.text }}
         height={30}
       />
