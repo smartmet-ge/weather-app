@@ -292,16 +292,16 @@
     }
   },
   "navigation": {
-    "map": "Map",
-    "weather": "Weather",
-    "others": "Other",
+    "map": "რუკა",
+    "weather": "ამინდი",
+    "others": "სხვა",
     "about": "About the application",
     "general": "General",
     "dataPrivacy": "Data privacy",
     "accessibility": "Accessibility",
     "termsAndConditions": "Terms of Use",
     "feedback": "Give feedback",
-    "warnings": "Warnings",
+    "warnings": "გაფრთხილება",
     "settings": "Settings",
     "fmiServices": "Services of the Finnish Meteorological Institute",
     "symbols": "Weather symbols",
@@ -406,9 +406,9 @@
         "moderate": "moderate",
         "strong": "heavy",
         "precipitationFin": {
-          "description": "Finnish radar combination with a 5-minute time step.",
+          "description": "Finnish radar combination with a 15-minute time step.",
           "observation": "The precipitation observation presented on the map has been measured with weather radars in Finland.",
-          "forecast": "The predicted precipitation is a short-term rainfall forecast based on radar observations."
+          "forecast": "The predicted precipitation is a short-term rainfall forecast based on radar images and weather forecast models."
         },
         "precipitationScan": {
           "description": "Scandinavian radar combination with a 1-hour time step.",
@@ -419,8 +419,8 @@
       "lightnings15": {
         "title": "Lightnings",
         "description": "Lightning layer shows observed lightning strikes in the area. Visualization is based on lightning age.",
-        "age1": "0-5 minutes old lightning",
-        "age2": "5-10 minutes old lightning"
+        "age1": "0-15 minutes old lightning",
+        "age2": "15-30 minutes old lightning"
       },
       "lightnings60": {
         "title": "Lightnings",
@@ -584,11 +584,11 @@
     "177": "$t(symbols:77)"
   },
   "warnings": {
-    "panelTitle": "Warnings",
-    "panelTitleSlim": "Warnings",
-    "panelTitleCap": "Warnings",
-    "warningsForNDays": "Warnings {{ days }} days",
-    "capUpdated": "Updated",
+    "panelTitle": "გაფრთხილება",
+    "panelTitleSlim": "გაფრთხილება",
+    "panelTitleCap": "გაფრთხილება",
+    "warningsForNDays": "გაფრთხილება {{ days }} დღე",
+    "capUpdated": "განახლება",
     "lastUpdated": "Last updated",
     "allWarnings": "Warnings in the whole Finland",
     "valid": "valid between",

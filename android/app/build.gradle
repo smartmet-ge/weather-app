@@ -98,11 +98,11 @@ android {
 
     namespace "fi.fmi.mobileweather"
     defaultConfig {
-        applicationId "fi.fmi.mobileweather"
+        applicationId "ge.gov.nea.mobileweather"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3000104
-        versionName "6.0.11"
+        versionCode 1
+        versionName "1.0.0"
         testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         missingDimensionStrategy 'detox', 'full'
@@ -154,7 +154,6 @@ android {
 }
 
 dependencies {
-    implementation project(':widgets')
     implementation 'androidx.work:work-runtime:2.7.1'
     androidTestImplementation('com.wix:detox:+')
     implementation 'androidx.appcompat:appcompat:1.7.0'
