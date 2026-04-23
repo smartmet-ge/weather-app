@@ -96,7 +96,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "fi.fmi.mobileweather"
+    namespace "ge.gov.nea.mobileweather"
     defaultConfig {
         applicationId "ge.gov.nea.mobileweather"
         minSdkVersion rootProject.ext.minSdkVersion
