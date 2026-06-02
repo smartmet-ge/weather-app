@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
-import { useTheme } from '@react-navigation/native';
 
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +11,7 @@ import { selectCurrent } from '@store/location/selector';
 import { selectUnits } from '@store/settings/selectors';
 
 import { getFeelsLikeIconName, getWindDirection } from '@utils/helpers';
-import { CustomTheme, WHITE } from '@assets/colors';
+import { WHITE } from '@assets/colors';
 
 import Text from '@components/common/AppText';
 import Icon from '@components/common/ScalableIcon';
@@ -52,7 +51,6 @@ const NextHourForecastBar: React.FC<NextHourForecastBarProps> = ({
 
   const locale = i18n.language;
   const decimalSeparator = locale === 'en' ? '.' : ',';
-  const { dark } = useTheme() as CustomTheme;
 
   if (!forecast) return null;
 
@@ -102,7 +100,7 @@ const NextHourForecastBar: React.FC<NextHourForecastBarProps> = ({
   );
 
   // Either show UV or precipitation
-  const showUv = forecast.precipitation1h === 0 || dark;
+  const showUv = false;
   const textColor = WHITE;
 
   return (
