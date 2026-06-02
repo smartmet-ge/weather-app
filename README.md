@@ -2,12 +2,12 @@
 
 ## **Prequisites**
 
-- Node (20)
+- Node (24.3.0 or newer)
 - Android Studio (latest)
 - XCode (latest)
 - Java JDK 17
 
-Follow this [guide](https://reactnative.dev/docs/0.82/set-up-your-environment) for setting up React Native development environment.
+Follow this [guide](https://reactnative.dev/docs/0.85/set-up-your-environment) for setting up React Native development environment.
 
 ## **Licence**
 This project is licensed under the MIT Licence - see the [LICENSE](LICENSE) file for details.
@@ -15,17 +15,28 @@ This project is licensed under the MIT Licence - see the [LICENSE](LICENSE) file
 
 ## **Installation**
 
-`git clone --recurse-submodules https://github.com/fmidev/weather-app.git `
+Homebrew package manager for macOS is required: https://brew.sh/
+
+`brew install cocoapods`
+`brew install gitleaks`
+
+`git clone --recurse-submodules https://github.com/smartmet-ge/weather-app.git`
 
 `cd weather-app`
 
 `yarn install`
+
+`cd ios && pod install`
 
 If you forget to clone with `--recurse-submodules`, you can fix assets by running
 
 `
 git submodule update --init --recursive
 `
+
+### **IOS**
+1. `cd ios`
+2. `pod install`
 
 ### **Android**
 
@@ -58,7 +69,7 @@ git submodule update --init --recursive
 
 ## **Development**
 
-Before running iOS or Android start metro: `yarn start`. Also make sure you have a valid DefaultConfig.ts.
+Before running iOS or Android start metro: `yarn start`. Also make sure you have a valid DefaultConfig.ts and WidgetConfig.json.
 
 #### **Run in development environment (Android)**
 
