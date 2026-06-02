@@ -38,7 +38,7 @@ describe('HeaderIcon', () => {
     expect(getByTestId('header-icon')).toBeTruthy();
     expect(mockIcon).toHaveBeenCalledWith(
       expect.objectContaining({
-        name: 'provider-logo-fi',
+        name: 'provider-logo-light',
         style: { color: '#0a0a0a' },
         height: 30,
       })
@@ -53,7 +53,7 @@ describe('HeaderIcon', () => {
     render(<HeaderIcon />);
     expect(mockIcon).toHaveBeenCalledWith(
       expect.objectContaining({
-        name: 'provider-logo-en',
+        name: 'provider-logo-light',
       })
     );
   });
