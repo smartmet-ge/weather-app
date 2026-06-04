@@ -12,7 +12,7 @@ const warning = {
     startTime: '2026-04-27T06:00:00Z',
   },
   severity: 'Severe',
-  type: 'wind',
+  type: 'Strong wind warning',
 } as types.Warning;
 
 const warningsData: types.WarningsData = {
@@ -28,7 +28,7 @@ const capWarning = {
     category: 'Met',
     certainty: 'Likely',
     description: 'Wind',
-    event: 'Wind',
+    event: 'Strong wind warning',
     expires: new Date('2026-04-28T00:00:00Z'),
     headline: 'Wind warning',
     instruction: '',
@@ -120,7 +120,7 @@ describe('warnings store', () => {
     expect(selectors.selectFetchSuccessTime(state)).toBe(1000);
     expect(selectors.selectDailyWarningData(state)[0]).toMatchObject({
       count: 1,
-      type: 'wind',
+      type: 'Strong wind warning',
       warnings: [warning],
     });
   });
