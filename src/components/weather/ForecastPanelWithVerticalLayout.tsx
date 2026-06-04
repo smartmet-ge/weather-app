@@ -100,8 +100,10 @@ const ForecastPanelWithVerticalLayout: React.FC<ForecastPanelProps> = ({
   }, [forecastByDay, dateKeys, selectedDate]);
 
   useEffect(() => {
+    moment.locale(locale);
     moment.tz.setDefault(timezone);
-  }, [timezone]);
+  }, [locale, timezone]);
+
   const sections =
     forecastByDay &&
     Object.keys(forecastByDay).map((k) => ({
