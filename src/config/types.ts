@@ -24,6 +24,7 @@ export type WMSSource = {
   source: string;
   layer: string;
   type: 'observation' | 'forecast';
+  referenceTimeEnabled?: boolean;
   customParameters?: {
     [name: string]: string | number | { dark: string; light: string };
   };
@@ -272,7 +273,7 @@ interface MarkdownSettings {
 //
 // Category = who, Action = where, Name = what was done.
 export type AnalyticCategories = 'User action' | 'Init' | 'Notice' | 'Warning' | 'Error';
-export type AnalyticActions = 'Weather' | 'Map' | 'Warnings' | 'Other' | 'Search' | 'Settings' | 'Navigation' | 'Geolocation' | 'News' | 'Platform' | 'Announcements' | 'Autocomplete' | 'Timeseries' | 'WMS' | 'DynamicConfig' | 'Snapshot' | 'Not specified';
+export type AnalyticActions = 'Weather' | 'Map' | 'Warnings' | 'Other' | 'Search' | 'Settings' | 'Navigation' | 'Geolocation' | 'News' | 'Platform' | 'Announcements' | 'Autocomplete' | 'Timeseries' | 'WMS' | 'DynamicConfig' | 'Snapshot' | 'Onboarding' | 'Not specified';
 
 export interface ConfigType {
   dynamicConfig: DynamicConfigEnabled | DynamicConfigDisabled;
