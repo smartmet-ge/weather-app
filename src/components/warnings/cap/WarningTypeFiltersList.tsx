@@ -47,6 +47,8 @@ const WarningTypeFiltersList = ({
               <WarningSymbol
                 severity={info.severity}
                 type={info.event as WarningType}
+                square
+                size={40}
               />
             </View>
           </AccessibleTouchableOpacity>
@@ -65,10 +67,10 @@ const styles = StyleSheet.create({
     right: 12,
   },
   filterButton: {
-    padding: 8,
-    borderRadius: 7,
+    padding: 0,
+    borderRadius: 5,
     marginRight: 12,
-    borderWidth: 2,
+    borderWidth: 3,
   },
   activeFilter: {
     borderColor: SECONDARY_BLUE,
