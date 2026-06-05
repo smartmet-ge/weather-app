@@ -2,7 +2,7 @@
   "weather": {
     "charts": {
       "forecastAccessibilityLabel": "10 დღის ამინდის პროგნოზი გრაფიკის სახით",
-      "observationAccessibilityLabel": "{{ პარამეტრი }} დაკვირვების მონაცემი გრაფიკის სახით",
+      "observationAccessibilityLabel": "{{ parameter }} დაკვირვების მონაცემი გრაფიკის სახით",
       "forecastAccessibilityHint": " იგივე მონაცემი ხელმისაწვდომია ცხრილის სახით",
       "observationAccessibilityHint": "იგივე მონაცემი ხელმისაწვდომია სიის სახით",
       "cloud": "ღრუბლის ქვედა საზღვარი",
