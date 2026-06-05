@@ -105,14 +105,12 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ navigation }) => {
       <ImageBackground
         style={styles.imageBackground}
         resizeMode="contain"
-        source={
-          backgroundImageProperties ? undefined :
-            dark ? require(`../assets/images/weather-background-dark.png`) : require(`../assets/images/weather-background-light.png`)
-        }>
+        source={undefined}>
         { backgroundImageProperties &&
           <Image
             style={[
               styles.customBackgroundImage,
+              styles.hidden,
               {
                 top: backgroundImageProperties?.top ?? 0,
                 height: backgroundImageProperties?.height ?? '100%'
@@ -291,12 +289,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  hidden: {
+    display: 'none',
+  },
   logo: {
     position: 'absolute',
     top: 40,
     left: 40,
-    height: 40,
-    width: 190,
+    height: 120,
+    width: 300,
   },
   innerContainer: {
     position: 'absolute',
@@ -431,7 +432,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 120,
     width: '100%',
-    height: 200
+    height: 200,
+    display: 'none',
   }
 });
 
