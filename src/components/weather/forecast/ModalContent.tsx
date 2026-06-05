@@ -9,7 +9,6 @@ import { State } from '@store/types';
 import { CustomTheme } from '@assets/colors';
 import { selectForecastByDay } from '@store/forecast/selectors';
 import ModalForecast from './ModalForecast';
-import { uppercaseFirst } from '@utils/helpers';
 import Icon from '@assets/Icon';
 import Text from '@components/common/AppText';
 import CloseButton from '@components/common/CloseButton';
@@ -76,7 +75,7 @@ const DailyModal: React.FC<ModalContentProps> = ({
             accessibilityRole="header"
             numberOfLines={1}
             style={[styles.text, styles.bold, styles.headerText, { color: colors.primaryText }]}>
-            {uppercaseFirst(moment(timeStamp).locale(i18n.language).format(dateFormat))}
+            {(moment(timeStamp).locale(i18n.language).format(dateFormat).toLowerCase())}
           </Text>
           <View accessible>
             <Icon
