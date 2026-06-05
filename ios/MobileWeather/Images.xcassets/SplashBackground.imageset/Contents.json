@@ -1,9 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "weather-background-light.png",
-      "idiom" : "universal",
-      "scale" : "1x"
+      "filename" : "nea weather background-01.png",
+      "idiom" : "universal"
     },
     {
       "appearances" : [
@@ -12,41 +11,8 @@
           "value" : "dark"
         }
       ],
-      "filename" : "weather-background-dark.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "weather-background-light@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "weather-background-dark@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "weather-background-light@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "weather-background-dark@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "nea weather background-02.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {
