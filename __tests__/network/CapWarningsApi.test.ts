@@ -30,11 +30,11 @@ describe('CapWarningsApi', () => {
       <feed>
         <updated>2035-01-01T00:00:00Z</updated>
         <entry>
-          <link href="http://warnings.example/keep.xml" type="application/cap+xml" />
-          <link href="http://warnings.example/keep.html" type="text/html" />
+          <link href="https://warnings.example/keep.html" type="text/html" />
+          <link href="https://warnings.example/keep.xml" type="application/cap+xml" />
         </entry>
         <entry>
-          <link href="http://warnings.example/expired.xml" type="application/cap+xml" />
+          <link href="https://warnings.example/expired.xml" type="application/cap+xml" />
         </entry>
       </feed>
     `;
@@ -77,7 +77,7 @@ describe('CapWarningsApi', () => {
       warnings: [expect.objectContaining({ identifier: 'keep' })],
     });
     expect(mockAxiosClient).toHaveBeenNthCalledWith(2, {
-      url: 'http://warnings.example/keep.xml',
+      url: 'https://warnings.example/keep.xml',
     });
   });
 });
