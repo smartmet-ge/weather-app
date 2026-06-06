@@ -77,7 +77,7 @@ describe('CapWarningsApi', () => {
       warnings: [expect.objectContaining({ identifier: 'keep' })],
     });
     expect(mockAxiosClient).toHaveBeenNthCalledWith(2, {
-      url: 'http://warnings.example/keep.xml',
+      url: 'https://warnings.example/keep.xml',
     });
   });
 });
