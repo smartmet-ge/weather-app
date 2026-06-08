@@ -4,8 +4,6 @@ import * as RNLocalize from "react-native-localize";
 
 import { getItem, LOCALE } from '../src/utils/async_storage';
 import en from './en.json';
-//import fi from './fi.json';
-//import sv from './sv.json';
 import ka from './ka.json';
 
 import defaultConfig from '../defaultConfig';

@@ -23,13 +23,13 @@ describe('WarningIcon', () => {
   });
 
   it('returns null when neither severity nor severityDescription is provided', () => {
-    const { toJSON } = render(<WarningIcon type="wind" />);
+    const { toJSON } = render(<WarningIcon type="Strong wind warning" />);
     expect(toJSON()).toBeNull();
     expect(mockIcon).not.toHaveBeenCalled();
   });
 
   it('renders severity circle color for numeric severity and hides icon when severity is 0', () => {
-    const { toJSON, queryByTestId } = render(<WarningIcon type="rain" severity={0} />);
+    const { toJSON, queryByTestId } = render(<WarningIcon type="Heavy precipitation warning" severity={0} />);
     const tree = toJSON() as any;
     const containerStyle = getMergedStyle(tree.props.style);
 
@@ -41,7 +41,7 @@ describe('WarningIcon', () => {
 
   it('maps severityDescription to severity color and icon name', () => {
     const { toJSON, getByTestId } = render(
-      <WarningIcon type="thunderstorm" severityDescription="Severe" />
+      <WarningIcon type="Thunderstorm warning" severityDescription="Severe" />
     );
 
     const tree = toJSON() as any;
@@ -50,7 +50,7 @@ describe('WarningIcon', () => {
     expect(getByTestId('warning-icon-svg')).toBeTruthy();
     expect(mockIcon).toHaveBeenCalledWith(
       expect.objectContaining({
-        name: 'fmi-warnings-thunderstorm',
+        name: 'fmi-warnings-Thunderstorm warning',
         size: expect.any(Number),
       })
     );
@@ -59,7 +59,7 @@ describe('WarningIcon', () => {
   it('renders wind physical overlays with rotation and intensity text', () => {
     const { getByText, toJSON } = render(
       <WarningIcon
-        type="wind"
+        type="Strong wind warning"
         severity={3}
         physical={{ windDirection: 45, windIntensity: 21 }}
       />
@@ -73,7 +73,7 @@ describe('WarningIcon', () => {
 
     expect(mockIcon).toHaveBeenCalledWith(
       expect.objectContaining({
-        name: 'fmi-warnings-wind',
+        name: 'fmi-warnings-Strong wind warning',
         size: expect.any(Number),
         style: { transform: [{ rotate: '225deg' }] },
       })
@@ -82,7 +82,7 @@ describe('WarningIcon', () => {
   });
 
   it('uses yellow color for Moderate severityDescription', () => {
-    const { toJSON } = render(<WarningIcon type="rain" severityDescription="Moderate" />);
+    const { toJSON } = render(<WarningIcon type="Heavy precipitation warning" severityDescription="Moderate" />);
     const tree = toJSON() as any;
     const containerStyle = getMergedStyle(tree.props.style);
     expect(containerStyle.backgroundColor).toBe(YELLOW);
