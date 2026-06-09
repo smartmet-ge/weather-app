@@ -1,6 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 
+import { BOLD_FONT } from '../../src/assets/constants';
 import SimpleButton from '../../src/components/common/SimpleButton';
 
 jest.mock('@react-navigation/native', () => ({
@@ -51,7 +52,7 @@ describe('SimpleButton', () => {
       : [textNode.props.style];
     const mergedTextStyle = Object.assign({}, ...textStyles);
     expect(mergedTextStyle.color).toBe('#222222');
-    expect(mergedTextStyle.fontFamily).toBe('Roboto-Bold');
+    expect(mergedTextStyle.fontFamily).toBe(BOLD_FONT);
     expect(mergedTextStyle.fontSize).toBe(15);
   });
 });

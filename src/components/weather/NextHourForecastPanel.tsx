@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { ActivityIndicator, View, Text, StyleSheet } from 'react-native';
+import { ActivityIndicator, View, Text, StyleSheet, Platform } from 'react-native';
 import moment from 'moment-timezone';
 import 'moment/locale/fi';
 import 'moment/locale/sv';
@@ -30,6 +30,7 @@ import {
   getForecastParameterUnitTranslationKey,
 } from '@utils/units';
 import { selectClockType } from '@store/settings/selectors';
+import { LIGHT_FONT, REGULAR_FONT, BOLD_FONT } from '@assets/constants';
 
 const mapStateToProps = (state: State) => ({
   clockType: selectClockType(state),
@@ -157,7 +158,11 @@ const NextHourForecastPanel: React.FC<NextHourForecastPanelProps> = ({
               {numericOrDash(temperatureValue)}
             </Text>
             <Text
-              style={[styles.unitText, { color: colors.primaryText }]}
+              // eslint-disable-next-line react-native/no-inline-styles
+              style={[styles.unitText, {
+                color: colors.primaryText,
+                paddingTop: Platform.OS === 'android' ? 24 : 12,
+              }]}
               accessibilityLabel={`${numericOrDash(temperatureValue)} ${t(
                 getForecastParameterUnitTranslationKey(`°${temperatureUnit}`)
               )} `}>
@@ -341,22 +346,22 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: REGULAR_FONT,
   },
   unitText: {
     fontSize: 24,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: REGULAR_FONT,
     paddingTop: 12,
   },
   bold: {
-    fontFamily: 'Roboto-Bold',
+    fontFamily: BOLD_FONT,
   },
   feelsLikeText: {
     fontSize: 20,
   },
   temperatureText: {
     fontSize: 72,
-    fontFamily: 'Roboto-Light',
+    fontFamily: LIGHT_FONT,
   },
   bottomInfoRow: {
     marginBottom: 11,
