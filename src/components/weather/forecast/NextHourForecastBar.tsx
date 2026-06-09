@@ -23,6 +23,7 @@ import {
 } from '@utils/units';
 import { setCurrentLocation as setCurrentLocationAction } from '@store/location/actions';
 import { TimeStepData } from '@store/forecast/types';
+import { REGULAR_FONT, BOLD_FONT } from '@assets/constants';
 
 const mapStateToProps = (state: State) => ({
   units: selectUnits(state),
@@ -267,10 +268,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: REGULAR_FONT,
   },
   bold: {
-    fontFamily: 'Roboto-Bold',
+    fontFamily: BOLD_FONT,
     fontWeight: 'bold',
   },
   feelsLikeIcon: {

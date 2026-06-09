@@ -3,19 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		A221F1712FD8551E00141838 /* MapLibre in Frameworks */ = {isa = PBXBuildFile; productRef = 18C5A51F13AF682172F66E0A /* MapLibre */; };
+		A221F18A2FD8557600141838 /* FiraGO-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A221F1862FD8557600141838 /* FiraGO-Light.ttf */; };
+		A221F18B2FD8557600141838 /* FiraGO-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A221F1872FD8557600141838 /* FiraGO-Medium.ttf */; };
+		A221F18C2FD8557600141838 /* FiraGO-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A221F1882FD8557600141838 /* FiraGO-Regular.ttf */; };
+		A221F18D2FD8557600141838 /* FiraGO-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A221F1852FD8557600141838 /* FiraGO-Bold.ttf */; };
+		A221F18E2FD8557600141838 /* FiraGO-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A221F1892FD8557600141838 /* FiraGO-SemiBold.ttf */; };
 		A292E7562D5F16C000DC288E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A292E7552D5F16C000DC288E /* AppDelegate.swift */; };
 		A41FA36F27FD733200B08157 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		A454032C25E66E860005997E /* SwiftEnabler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A454032B25E66E860005997E /* SwiftEnabler.swift */; };
-		A45BF91D26B41657000BF75C /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A45BF91826B41657000BF75C /* Roboto-Bold.ttf */; };
-		A45BF91E26B41657000BF75C /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A45BF91926B41657000BF75C /* Roboto-Light.ttf */; };
-		A45BF91F26B41657000BF75C /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A45BF91A26B41657000BF75C /* Roboto-Medium.ttf */; };
-		A45BF92026B41657000BF75C /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A45BF91B26B41657000BF75C /* Roboto-Regular.ttf */; };
-		A45BF92126B41657000BF75C /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A45BF91C26B41657000BF75C /* Roboto-Thin.ttf */; };
 		A4C8322726C6896900FEC2EB /* icons in Resources */ = {isa = PBXBuildFile; fileRef = A4C8322626C6896900FEC2EB /* icons */; };
 		A4C8322926C6897A00FEC2EB /* symbols in Resources */ = {isa = PBXBuildFile; fileRef = A4C8322826C6897A00FEC2EB /* symbols */; };
 		A4CDDC8C280007F400D84935 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4CDDC8E280007F400D84935 /* InfoPlist.strings */; };
@@ -52,6 +53,11 @@
 		99DF258CBD865F8BD6216BB5 /* Pods-MobileWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileWeather.release.xcconfig"; path = "Target Support Files/Pods-MobileWeather/Pods-MobileWeather.release.xcconfig"; sourceTree = "<group>"; };
 		A2042C6D2CFF2EEE00C41A9E /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		A20CB3142CCFCE01005C4D66 /* typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = typography.swift; sourceTree = "<group>"; };
+		A221F1852FD8557600141838 /* FiraGO-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FiraGO-Bold.ttf"; path = "../src/assets/fonts/FiraGO-Bold.ttf"; sourceTree = SOURCE_ROOT; };
+		A221F1862FD8557600141838 /* FiraGO-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FiraGO-Light.ttf"; path = "../src/assets/fonts/FiraGO-Light.ttf"; sourceTree = SOURCE_ROOT; };
+		A221F1872FD8557600141838 /* FiraGO-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FiraGO-Medium.ttf"; path = "../src/assets/fonts/FiraGO-Medium.ttf"; sourceTree = SOURCE_ROOT; };
+		A221F1882FD8557600141838 /* FiraGO-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FiraGO-Regular.ttf"; path = "../src/assets/fonts/FiraGO-Regular.ttf"; sourceTree = SOURCE_ROOT; };
+		A221F1892FD8557600141838 /* FiraGO-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FiraGO-SemiBold.ttf"; path = "../src/assets/fonts/FiraGO-SemiBold.ttf"; sourceTree = SOURCE_ROOT; };
 		A2239EB02CD22056007FE840 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		A2239EB32CD39885007FE840 /* widgetConfig.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = widgetConfig.json; path = ../widgetConfig.json; sourceTree = SOURCE_ROOT; };
 		A2239EB52CD399D9007FE840 /* config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
@@ -78,11 +84,6 @@
 		A454032A25E66E860005997E /* MobileWeather-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MobileWeather-Bridging-Header.h"; path = "../MobileWeather-Bridging-Header.h"; sourceTree = "<group>"; };
 		A454032B25E66E860005997E /* SwiftEnabler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftEnabler.swift; path = ../SwiftEnabler.swift; sourceTree = "<group>"; };
 		A454033125E6830C0005997E /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		A45BF91826B41657000BF75C /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
-		A45BF91926B41657000BF75C /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
-		A45BF91A26B41657000BF75C /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		A45BF91B26B41657000BF75C /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		A45BF91C26B41657000BF75C /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Thin.ttf"; path = "../src/assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		A4BAA1A826BD1F040096B054 /* symbols */ = {isa = PBXFileReference; lastKnownFileType = folder; name = symbols; path = ../src/assets/images/symbols; sourceTree = "<group>"; };
 		A4C8322426C685A700FEC2EB /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../src/assets/images; sourceTree = "<group>"; };
 		A4C8322626C6896900FEC2EB /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = ../src/assets/images/icons; sourceTree = "<group>"; };
@@ -95,39 +96,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A2042C6F2CFF2EEF00C41A9E /* SettingsIntentExtension */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = SettingsIntentExtension;
-			sourceTree = "<group>";
-		};
-		A286CB982CF49C2900812898 /* managers */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = managers;
-			sourceTree = "<group>";
-		};
-		A299E3022CDB746F003502F5 /* views */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = views;
-			sourceTree = "<group>";
-		};
+		A2042C6F2CFF2EEF00C41A9E /* SettingsIntentExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SettingsIntentExtension; sourceTree = "<group>"; };
+		A286CB982CF49C2900812898 /* managers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = managers; sourceTree = "<group>"; };
+		A299E3022CDB746F003502F5 /* views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = views; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A221F1712FD8551E00141838 /* MapLibre in Frameworks */,
 				BFD98EF8D9DDD60D677C76DE /* libPods-MobileWeather.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,11 +175,6 @@
 				A4C8322626C6896900FEC2EB /* icons */,
 				A4C8322426C685A700FEC2EB /* images */,
 				A4BAA1A826BD1F040096B054 /* symbols */,
-				A45BF91826B41657000BF75C /* Roboto-Bold.ttf */,
-				A45BF91926B41657000BF75C /* Roboto-Light.ttf */,
-				A45BF91A26B41657000BF75C /* Roboto-Medium.ttf */,
-				A45BF91B26B41657000BF75C /* Roboto-Regular.ttf */,
-				A45BF91C26B41657000BF75C /* Roboto-Thin.ttf */,
 				13B07FAE1A68108700A75B9A /* MobileWeather */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				A2B3FFB22CC8E6AE00EC1293 /* Widget */,
@@ -259,6 +226,11 @@
 		A443E2B425DBFF2200B0BCF9 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				A221F1852FD8557600141838 /* FiraGO-Bold.ttf */,
+				A221F1862FD8557600141838 /* FiraGO-Light.ttf */,
+				A221F1872FD8557600141838 /* FiraGO-Medium.ttf */,
+				A221F1882FD8557600141838 /* FiraGO-Regular.ttf */,
+				A221F1892FD8557600141838 /* FiraGO-SemiBold.ttf */,
 				A443E2B525DBFF4700B0BCF9 /* Ionicons.ttf */,
 			);
 			name = Fonts;
@@ -339,12 +311,12 @@
 				A41FA36F27FD733200B08157 /* Images.xcassets in Resources */,
 				A4C8322926C6897A00FEC2EB /* symbols in Resources */,
 				A4C8322726C6896900FEC2EB /* icons in Resources */,
-				A45BF92126B41657000BF75C /* Roboto-Thin.ttf in Resources */,
-				A45BF92026B41657000BF75C /* Roboto-Regular.ttf in Resources */,
-				A45BF91F26B41657000BF75C /* Roboto-Medium.ttf in Resources */,
+				A221F18A2FD8557600141838 /* FiraGO-Light.ttf in Resources */,
+				A221F18B2FD8557600141838 /* FiraGO-Medium.ttf in Resources */,
+				A221F18C2FD8557600141838 /* FiraGO-Regular.ttf in Resources */,
+				A221F18D2FD8557600141838 /* FiraGO-Bold.ttf in Resources */,
+				A221F18E2FD8557600141838 /* FiraGO-SemiBold.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				A45BF91E26B41657000BF75C /* Roboto-Light.ttf in Resources */,
-				A45BF91D26B41657000BF75C /* Roboto-Bold.ttf in Resources */,
 				A4CDDC8C280007F400D84935 /* InfoPlist.strings in Resources */,
 				AF2CB2F4800B89C89592A7FB /* PrivacyInfo.xcprivacy in Resources */,
 			);

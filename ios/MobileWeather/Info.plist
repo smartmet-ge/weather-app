@@ -67,11 +67,11 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Roboto-Thin.ttf</string>
-		<string>Roboto-Regular.ttf</string>
-		<string>Roboto-Medium.ttf</string>
-		<string>Roboto-Light.ttf</string>
-		<string>Roboto-Bold.ttf</string>
+		<string>FiraGO-Thin.ttf</string>
+		<string>FiraGO-Regular.ttf</string>
+		<string>FiraGO-Medium.ttf</string>
+		<string>FiraGO-Light.ttf</string>
+		<string>FiraGO-Bold.ttf</string>
 		<string>Ionicons.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

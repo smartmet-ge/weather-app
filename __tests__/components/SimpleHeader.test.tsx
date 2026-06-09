@@ -2,6 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { render } from '@testing-library/react-native';
 
+import { BOLD_FONT } from '../../src/assets/constants';
 import SimpleHeader from '../../src/components/common/SimpleHeader';
 
 jest.mock('@react-navigation/native', () => ({
@@ -32,7 +33,7 @@ describe('SimpleHeader', () => {
 
     expect(mergedTextStyle.color).toBe('#101010');
     expect(mergedTextStyle.fontSize).toBe(18);
-    expect(mergedTextStyle.fontFamily).toBe('Roboto-Bold');
+    expect(mergedTextStyle.fontFamily).toBe(BOLD_FONT);
 
     const tree = toJSON() as any;
     expect(tree.props.accessibilityRole).toBe('header');

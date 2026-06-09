@@ -1,6 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 
+import { BOLD_FONT, REGULAR_FONT } from '../../src/assets/constants';
 import HourSelectorButton from '../../src/components/common/HourSelectorButton';
 
 jest.mock('@react-navigation/native', () => ({
@@ -49,7 +50,7 @@ describe('HourSelectorButton', () => {
 
     expect(mergedButtonStyle.backgroundColor).toBe('#ffd166');
     expect(mergedTextStyle.color).toBe('#111111');
-    expect(mergedTextStyle.fontFamily).toBe('Roboto-Bold');
+    expect(mergedTextStyle.fontFamily).toBe(BOLD_FONT);
   });
 
   it('applies disabled and separator styles and inactive text color', () => {
@@ -75,6 +76,6 @@ describe('HourSelectorButton', () => {
     expect(mergedButtonStyle.opacity).toBe(0.5);
     expect(mergedButtonStyle.borderRightWidth).toBe(1);
     expect(mergedTextStyle.color).toBe('#777777');
-    expect(mergedTextStyle.fontFamily).toBe('Roboto-Regular');
+    expect(mergedTextStyle.fontFamily).toBe(REGULAR_FONT);
   });
 });
