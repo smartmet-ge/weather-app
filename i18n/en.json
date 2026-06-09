@@ -459,7 +459,7 @@
           "long": "The layer displays temperature on a 3-hour time step from the next hour onward for three days."
         }
       },
-      "timeseriesLayerInfo": "The weather forecast on the map shows the weather symbol and temperature for numerous locations around the world. Tap the symbol to display more weather information.",
+      "timeseriesLayerInfo": "The weather forecast on the map shows the weather symbol and temperature. Tap the symbol to display more weather information.",
       "markdownLoadingFailed": "Loading map layer description failed"
     }
   },
@@ -671,10 +671,10 @@
     "ka": "ქართული",
     "next": "Next",
     "skip": "Skip",
-    "weatherTitle": "Weather forecast and observations",
-    "weatherDescription": "You can view versatile weather forecast and observation information in a format that suits you.",
+    "weatherTitle": "Welcome to the Meteo.Gov.Ge app",
+    "weatherDescription": "View weather forecasts, observations, and warnings from a trusted source.",
     "mapTitle": "Map",
-    "mapDescription": "For example, you can view the movement of rainfall in the next few hours on the map.",
+    "mapDescription": "View precipitation, temperature, and other weather data on the map",
     "warningsTitle": "Warnings",
     "warningsDescription": "Be aware of weather warnings in force in your area.",
     "customizeTitle": "Customize",
