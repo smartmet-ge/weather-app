@@ -36,7 +36,7 @@ const SetupScreen: React.FC<SetupScreenProps> = ({
   setUpDone,
   termsOfUseChanged,
 }) => {
-  const { languageSpecificLogo, backgroundImageProperties } = Config.get('onboardingWizard');
+  const { languageSpecificLogo } = Config.get('onboardingWizard');
   const { t, i18n } = useTranslation('setUp');
   const { colors, dark } = useTheme() as CustomTheme;
   const [pageIndex, setPageIndex] = useState<number>(0);
@@ -203,27 +203,7 @@ const SetupScreen: React.FC<SetupScreenProps> = ({
       <ImageBackground
         style={styles.imageBackground}
         resizeMode="contain"
-        source={
-          backgroundImageProperties ? undefined :
-            dark ? require(`../assets/images/weather-background-dark.png`) : require(`../assets/images/weather-background-light.png`)
-        }>
-        { backgroundImageProperties &&
-          <Image
-            style={[
-              styles.customBackgroundImage,
-              {
-                top: backgroundImageProperties?.top ?? 0,
-                height: backgroundImageProperties?.height ?? '100%'
-              }
-            ]}
-            resizeMode="contain"
-            source={
-              dark
-                ? require(`../assets/images/weather-background-dark.png`)
-                : require(`../assets/images/weather-background-light.png`)
-            }
-          />
-        }
+        source={undefined}>
         <Image
           source={
             dark
@@ -300,10 +280,10 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: 'absolute',
-    top: 40,
+    top: 20,
     left: 40,
-    height: 40,
-    width: 190,
+    height: 150,
+    width: 300,
   },
   innerContainer: {
     position: 'absolute',
@@ -399,6 +379,7 @@ const styles = StyleSheet.create({
   marginBottom40: {
     marginBottom: 40,
   },
+  // eslint-disable-next-line react-native/no-unused-styles
   customBackgroundImage: {
     position: 'absolute',
     top: 120,
