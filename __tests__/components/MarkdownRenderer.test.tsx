@@ -2,6 +2,8 @@ import React from 'react';
 import { Linking } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 
+import { REGULAR_FONT } from '../../src/assets/constants';
+
 const mockTrackMatomoEvent = jest.fn();
 const mockIcon = jest.fn((props) => {
   const { Text: MockText } = require('react-native');
@@ -47,7 +49,7 @@ describe('MarkdownRenderer', () => {
     const mergedStyle = Object.assign({}, ...styleArray);
 
     expect(mergedStyle.color).toBe('#112233');
-    expect(mergedStyle.fontFamily).toBe('Roboto-Regular');
+    expect(mergedStyle.fontFamily).toBe(REGULAR_FONT);
   });
 
   it('renders inline icon and temperature legend tokens', () => {
