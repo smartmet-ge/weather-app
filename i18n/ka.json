@@ -331,7 +331,7 @@
     "wind": "ქარი",
     "pressure": "წნევა",
     "appearance": "გრაფიკული ინტეფეისი",
-    "appearanceLight": "ღია",
+    "appearanceLight": "ნათელი",
     "appearanceDark": "მუქი",
     "appearanceAutomatic": "ავტომატური",
     "allowLocation": "ადგილმდებარეობის გაზიარება",
@@ -339,8 +339,8 @@
     "locationWhenInUse": "აპლიკაციის გამოყენებისას",
     "locationAlways": "ყოველთვის",
     "edit": "რედაქტირება",
-    "en": "in English",
-    "ka": "ქართულად",
+    "en": "English",
+    "ka": "ქართული",
     "languageHint": "შეცვალეთ აპლიკაციის ენა:",
     "appearanceHint": "შეცვალეთ აპლიკაციის გრაფიკული ინტეფეისი:",
     "locationSettingHint": "ადგილმდებარეობის სამართავად გახსენით მოწყობილობის პარამეტრები",
@@ -691,7 +691,16 @@
     "hoursSpoken": "საათი",
     "minutesSpoken": "წუთი"
   },
-  "unitAbbreviations": {},
+  "unitAbbreviations": {
+    "h": "სთ",
+    "min": "წთ",
+    "mm": "მმ",
+    "m/s": "მ/წმ",
+    "hPa": "ჰპა",
+    "mbar": "მბარ",
+    "km/h": "კმ/სთ",
+    "mmHg": "მმ ვწყ.სვ"
+  },
   "markdownRenderer": {
     "radarLegendDescription": "ნალექის ინტენსივობის შკალა"
   },
