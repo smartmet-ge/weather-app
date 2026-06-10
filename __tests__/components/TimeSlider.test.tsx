@@ -297,4 +297,87 @@ describe('TimeSlider', () => {
     });
     expect(mockHapticTrigger).toHaveBeenCalled();
   });
+
+  it('resets animation to the beginning when reaching the end of the timeline', () => {
+    const store = createStore({
+      mock: {
+        activeOverlayId: 1,
+        sliderTime: 1710000000,
+        overlay: {
+          step: 60,
+          observation: { end: '2024-03-09T16:00:00Z' },
+        },
+        clockType: 24,
+        animationSpeed: 50,
+      },
+    });
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { getByA11yLabel, UNSAFE_getByType } = render(
+      <Provider store={store as any}>
+        <TimeSlider />
+      </Provider>
+    );
+
+    const scrollView = UNSAFE_getByType(ScrollView);
+
+    act(() => {
+      fireEvent(scrollView, 'layout');
+    });
+    mockUpdateSliderTime.mockClear();
+
+    // Start animation
+    fireEvent.press(getByA11yLabel('Play'));
+
+    // Advance time enough to exceed the slider length
+    // stepWidth is ~60, 3 items -> max index threshold is ~180.
+    // Adding ~4.8px per 50ms, 2500ms (50 ticks) will cross 180 and trigger the reset.
+    act(() => {
+      jest.advanceTimersByTime(2500);
+    });
+
+    // The animation should have reached the end and reset back to the first item
+    expect(mockUpdateSliderTime).toHaveBeenCalledWith(1710000000);
+  });
+
+  it('ignores momentum scroll events when animation is running', () => {
+    const store = createStore({
+      mock: {
+        activeOverlayId: 1,
+        sliderTime: 1710000000,
+        overlay: {
+          step: 60,
+          observation: { end: '2024-03-09T16:00:00Z' },
+        },
+        clockType: 24,
+        animationSpeed: 50,
+      },
+    });
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { getByA11yLabel, UNSAFE_getByType } = render(
+      <Provider store={store as any}>
+        <TimeSlider />
+      </Provider>
+    );
+
+    const scrollView = UNSAFE_getByType(ScrollView);
+
+    // Start animation
+    fireEvent.press(getByA11yLabel('Play'));
+    mockUpdateSliderTime.mockClear();
+
+    // Trigger momentum scroll end (simulating OS/device behavior at boundaries)
+    act(() => {
+      fireEvent(scrollView, 'momentumScrollEnd', {
+        nativeEvent: {
+          contentOffset: { x: 500 },
+        },
+      });
+    });
+
+    // Because we are animating, the momentum scroll should be ignored,
+    // and it shouldn't jump the time to the event's offset immediately.
+    expect(mockUpdateSliderTime).not.toHaveBeenCalledWith(1710007200);
+  });
 });
