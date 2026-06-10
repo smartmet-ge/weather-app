@@ -209,6 +209,10 @@ const TimeSlider: React.FC<TimeSliderProps> = ({
   };
 
   const handleMomentumScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    if (isAnimating) {
+      return;
+    }
+
     const {
       contentOffset: { x },
     } = e.nativeEvent;
@@ -237,15 +241,13 @@ const TimeSlider: React.FC<TimeSliderProps> = ({
   const resolveAndSetCurrentIndex = useCallback(
     (x: number) => {
       const index = Math.floor(x / stepWidth);
-      if (index >= 0 && index <= sliderTimes.length) {
-        if (index === sliderTimes.length) {
-          setCurrentIndex(index - 1);
-          if (isAnimating) {
-            setScrollIndex(0);
-          }
-        } else {
-          setCurrentIndex(index);
+      if (index >= sliderTimes.length) {
+        setCurrentIndex(sliderTimes.length - 1);
+        if (isAnimating) {
+          setScrollIndex(0);
         }
+      } else if (index >= 0) {
+        setCurrentIndex(index);
       }
     },
     [sliderTimes, isAnimating, stepWidth]
