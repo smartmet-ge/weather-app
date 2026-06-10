@@ -338,6 +338,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: REGULAR_FONT,
     paddingTop: 12,
+    includeFontPadding: false,
   },
   centeredText: {
     textAlign: 'center',
@@ -347,6 +348,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   temperatureText: {
+    includeFontPadding: false,
     fontSize: 72,
     fontFamily: LIGHT_FONT,
   },
