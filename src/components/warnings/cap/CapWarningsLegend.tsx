@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
+
 import React from 'react';
 import {
   Text,
@@ -7,6 +7,8 @@ import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
+
 import CloseButton from '@components/common/CloseButton';
 import {
   CustomTheme,
@@ -17,13 +19,13 @@ import {
   CAP_WARNING_RED,
 } from '@assets/colors';
 import { useTheme } from '@react-navigation/native';
-import { t } from 'i18next';
 import CapSeverityBar from './CapSeverityBar';
 import TypeColorRow from '../TypeColorRow';
 import { BOLD_FONT } from '@assets/constants';
 import WarningSymbol, { landEvents, seaEvents, typeMap as eventMap } from '@assets/WarningsSymbol';
 
 const CapWarningsLegend = ({ onClose }: { onClose: () => void }) => {
+  const { t } = useTranslation('warnings');
   const { colors } = useTheme() as CustomTheme;
   const severityColors = [
     CAP_WARNING_NEUTRAL,
@@ -119,7 +121,7 @@ const CapWarningsLegend = ({ onClose }: { onClose: () => void }) => {
                 <View key={event} style={styles.legendRow}>
                   <WarningSymbol type={fullName} size={32} severity='Moderate'/>
                   <Text style={[styles.eventText, { color: colors.primaryText }]}>
-                    {t(`${event}`)}
+                    {t(`warnings:events.${event}`)}
                   </Text>
                 </View>
                 ) : null;
@@ -136,7 +138,7 @@ const CapWarningsLegend = ({ onClose }: { onClose: () => void }) => {
                 <View key={event} style={styles.legendRow}>
                   <WarningSymbol type={fullName} size={32} severity='Moderate'/>
                   <Text style={[styles.eventText, { color: colors.primaryText }]}>
-                    {t(`${event}`)}
+                    {t(`warnings:events.${event}`)}
                   </Text>
                 </View>
                 ) : null;
