@@ -48,9 +48,7 @@ const DailyModal: React.FC<ModalContentProps> = ({
   const { fontScale } = useWindowDimensions();
   const { t, i18n } = useTranslation('forecast');
   const { colors } = useTheme() as CustomTheme;
-  const largeFonts = fontScale >= 1.5;
   const iconSize = Math.min(fontScale * 22, 44);
-  const dateFormat = largeFonts ? 'dd D.M.' : 'dddd, D.M.';
 
   return (
     <View style={styles.container}>
@@ -76,7 +74,7 @@ const DailyModal: React.FC<ModalContentProps> = ({
             accessibilityRole="header"
             numberOfLines={1}
             style={[styles.text, styles.bold, styles.headerText, { color: colors.primaryText }]}>
-            {(moment(timeStamp).locale(i18n.language).format(dateFormat).toLowerCase())}
+            {moment(timeStamp).formatDateTime('longDate', i18n.language)}
           </Text>
           <View accessible>
             <Icon
