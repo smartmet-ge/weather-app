@@ -35,8 +35,7 @@ import UnitSettings from '@components/settings/UnitSettings';
 import LanguageSettings from '@components/settings/LanguageSettings';
 import ThemeSettings from '@components/settings/ThemeSettings';
 import TimeSettings from '@components/settings/TimeSettings';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import MapSettings from '@components/settings/MapSettings';
+//import MapSettings from '@components/settings/MapSettings';
 
 const LOCATION_ALWAYS = 'location_always';
 const LOCATION_WHEN_IN_USE = 'location_when_in_use';
@@ -208,7 +207,7 @@ const SettingsScreen: React.FC<Props> = ({
           <UnitSettings units={units} onChangeUnits={onChangeUnits} />
         )}
 
-        {/* Map settings are currently disabled
+        { /*
         <MapSettings
           mapLibrary={mapLibrary}
           updateMapLibrary={updateMapLibrary}
