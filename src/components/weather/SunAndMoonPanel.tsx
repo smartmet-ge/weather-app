@@ -89,7 +89,7 @@ const SunAndMoonPanel: React.FC<NextHoursForecastProps> = ({
   const moonPhase = resolveMoonPhase(forecast.moonPhase as number, waningMoonPhase);
   const moonBackground = moonPhaseImages[moonPhase];
   const iconSize = Math.min(ICON_SIZE * fontScale, 32);
-  const moonPhaseWidth = Math.min(fontScale * 80, boxWidth/1.8);
+  const moonPhaseWidth = '100%';
 
   return (
     <View style={[styles.container, styles.flex, styles.center, { backgroundColor: colors.background }]}>
@@ -261,6 +261,7 @@ const styles = StyleSheet.create({
     fontFamily: REGULAR_FONT,
     fontSize: 14,
     color: BLACK,
+    includeFontPadding: false,
   },
   smallText: {
     fontFamily: REGULAR_FONT,

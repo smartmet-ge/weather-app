@@ -6,7 +6,9 @@ import CapWarningsLegend from '../../src/components/warnings/cap/CapWarningsLege
 const mockCloseButton = jest.fn((props) => {
   const { TouchableOpacity, Text } = require('react-native');
   return (
-    <TouchableOpacity onPress={props.onPress} accessibilityLabel={props.accessibilityLabel}>
+    <TouchableOpacity
+      onPress={props.onPress}
+      accessibilityLabel={props.accessibilityLabel}>
       <Text testID="close-button">close</Text>
     </TouchableOpacity>
   );
@@ -43,6 +45,20 @@ jest.mock('../../src/components/warnings/TypeColorRow', () => ({
   default: ({ severity }: any) => {
     const { Text } = require('react-native');
     return <Text testID={`type-color-row-${severity}`}>{severity}</Text>;
+  },
+}));
+
+jest.mock('@assets/WarningsSymbol', () => ({
+  __esModule: true,
+  default: ({ type }: any) => {
+    const { Text } = require('react-native');
+    return <Text testID={`warning-symbol-${type}`}>{type}</Text>;
+  },
+  landEvents: ['warnings:landEvent'],
+  seaEvents: ['warnings:seaEvent'],
+  typeMap: {
+    'warnings:landEvent': true,
+    'warnings:seaEvent': true,
   },
 }));
 
