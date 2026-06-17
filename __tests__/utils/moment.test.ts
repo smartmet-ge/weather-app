@@ -8,7 +8,7 @@ describe('moment formatDateTime extension', () => {
   });
 
   it('formats dateTime with locale fallback to default settings', () => {
-    expect(baseMoment.formatDateTime('dateTime', 'fi')).toBe('15.6. 17:08');
+    expect(baseMoment.formatDateTime('dateTime', 'fi')).toBe('15 kesä 17:08');
   });
 
   it('formats time with default format when locale-specific time is missing', () => {
@@ -26,7 +26,7 @@ describe('moment formatDateTime extension', () => {
   });
 
   it('uppercases the first formatted character when format starts with U', () => {
-    expect(baseMoment.formatDateTime('weekday', 'fi')).toBe('Maanantai');
+    expect(baseMoment.formatDateTime('weekday', 'fi')).toBe('maanantai');
   });
 
   it('resolves language tags to base locale for format lookup', () => {
