@@ -22,7 +22,7 @@ import { Rain } from '../assets/colors';
 import { converter, toPrecision, UNITS } from './units';
 import { UnitMap } from '@store/settings/types';
 import { trackMatomoEvent } from './matomo';
-import { findNearestLocation } from './geolocation';
+import { findNearestLocation, getCountryName } from './geolocation';
 import i18n from '@i18n';
 
 const getPosition = (
@@ -40,7 +40,12 @@ const getPosition = (
       if (source === 'json') {
         const location = findNearestLocation(latitude, longitude, maxDistance ?? 10);
         const name = location?.name[i18n.language] || location?.name.primary || `${latitude}, ${longitude}`;
-        const region = location?.region[i18n.language] || location?.region.primary || '';
+        let region = '';
+
+        if (location) {
+          region = location.country === 'GE' ? location.region[i18n.language] || location.region.primary
+                    : getCountryName(location.country, i18n.language);
+        }
 
         AccessibilityInfo.announceForAccessibility(
           region
