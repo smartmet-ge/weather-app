@@ -12,6 +12,7 @@ export const knownWarningTypes = [
   'Very high snow avalanche danger',
   'Hail warning',
   'Flash flood warning',
+  'Urban flood warning',
   'Flood warning',
   'Heavy snowfall warning',
   'Heavy snowfall and strong wind warning',
