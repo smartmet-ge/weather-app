@@ -12,6 +12,7 @@ export const knownWarningTypes = [
   'Very high snow avalanche danger',
   'Hail warning',
   'Flash flood warning',
+  'Urban flood warning',
   'Flood warning',
   'Heavy snowfall warning',
   'Heavy snowfall and strong wind warning',
@@ -58,6 +59,7 @@ export const knownWarningTypes = [
   'გაფრთხილება ულტრაიისფერი გამოსხივების მაღალი დონის შესახებ',
   'გაფრთხილება შტორმული ღელვის შესახებ',
   'გაფრთხილება ზღვაზე შტორმის შესახებ',
+  'გაფრთხილება წყალმოვა',
 
   // do not delete
   'wind',
