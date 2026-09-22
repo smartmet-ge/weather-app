@@ -24,6 +24,15 @@ export const parseCapPolygon = (
         return validPositions;
       }
 
+      const previousPosition = validPositions[validPositions.length - 1];
+      if (
+        previousPosition &&
+        previousPosition[0] === longitude &&
+        previousPosition[1] === latitude
+      ) {
+        return validPositions;
+      }
+
       validPositions.push([longitude, latitude]);
       return validPositions;
     }, []);
