@@ -1,7 +1,4 @@
-import {
-  GeoJsonPosition,
-  simplifyPolygon,
-} from '@utils/simplifyPolygon';
+import { GeoJsonPosition, simplifyPolygon } from '@utils/simplifyPolygon';
 
 export const parseCapPolygon = (
   polygon: string,

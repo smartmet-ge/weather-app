@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Text,
@@ -22,7 +21,11 @@ import { useTheme } from '@react-navigation/native';
 import CapSeverityBar from './CapSeverityBar';
 import TypeColorRow from '../TypeColorRow';
 import { BOLD_FONT } from '@assets/constants';
-import WarningSymbol, { landEvents, seaEvents, typeMap as eventMap } from '@assets/WarningsSymbol';
+import WarningSymbol, {
+  landEvents,
+  seaEvents,
+  typeMap as eventMap,
+} from '@assets/WarningsSymbol';
 
 const CapWarningsLegend = ({ onClose }: { onClose: () => void }) => {
   const { t } = useTranslation('warnings');
@@ -114,35 +117,49 @@ const CapWarningsLegend = ({ onClose }: { onClose: () => void }) => {
             <Text style={[styles.headingText, { color: colors.primaryText }]}>
               {t('warnings:capInfo:warningExplanationsOnLand')}
             </Text>
-            { // @ts-ignore
+            {
+              // @ts-ignore
               landEvents.map((event) => {
                 const fullName = `${event}` as const;
                 return eventMap[fullName] ? (
-                <View key={event} style={styles.legendRow}>
-                  <WarningSymbol type={fullName} size={32} severity='Moderate'/>
-                  <Text style={[styles.eventText, { color: colors.primaryText }]}>
-                    {t(`warnings:events.${event}`)}
-                  </Text>
-                </View>
+                  <View key={event} style={styles.legendRow}>
+                    <WarningSymbol
+                      type={fullName}
+                      size={32}
+                      severity="Moderate"
+                    />
+                    <Text
+                      style={[styles.eventText, { color: colors.primaryText }]}>
+                      {t(`warnings:events.${event}`)}
+                    </Text>
+                  </View>
                 ) : null;
-            })}
+              })
+            }
           </View>
           <View style={styles.contentContainer}>
             <Text style={[styles.headingText, { color: colors.primaryText }]}>
               {t('warnings:capInfo:warningExplanationsAtSea')}
             </Text>
-            { // @ts-ignore
+            {
+              // @ts-ignore
               seaEvents.map((event) => {
                 const fullName = `${event}` as const;
                 return eventMap[fullName] ? (
-                <View key={event} style={styles.legendRow}>
-                  <WarningSymbol type={fullName} size={32} severity='Moderate'/>
-                  <Text style={[styles.eventText, { color: colors.primaryText }]}>
-                    {t(`warnings:events.${event}`)}
-                  </Text>
-                </View>
+                  <View key={event} style={styles.legendRow}>
+                    <WarningSymbol
+                      type={fullName}
+                      size={32}
+                      severity="Moderate"
+                    />
+                    <Text
+                      style={[styles.eventText, { color: colors.primaryText }]}>
+                      {t(`warnings:events.${event}`)}
+                    </Text>
+                  </View>
                 ) : null;
-            })}
+              })
+            }
           </View>
           <View style={[styles.contentContainer, styles.borderBottom]}>
             <Text style={[styles.headingText, { color: colors.primaryText }]}>
@@ -207,11 +224,11 @@ const styles = StyleSheet.create({
   },
   severityBarLegendText: {
     marginLeft: 14,
-    flexWrap: 'wrap',
+    flex: 1,
   },
   eventText: {
     marginLeft: 16,
-    width: '100%',
+    flex: 1,
   },
 });
 
