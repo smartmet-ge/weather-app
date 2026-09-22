@@ -1,4 +1,5 @@
 ENV['RCT_NEW_ARCH_ENABLED'] = '1'
+minimum_ios = Gem::Version.new('15.0')
 
 # Transform this into a `node_require` generic function:
 def node_require(script)
@@ -39,25 +40,19 @@ target 'MobileWeather' do
 
   post_install do |installer|
 
-    # Xcode 26 workaround: patch fmt to disable consteval
-    fmt_base = File.join(installer.sandbox.root, 'fmt', 'include', 'fmt', 'base.h')
-    if File.exist?(fmt_base)
-      content = File.read(fmt_base)
-      unless content.include?('Xcode 26 workaround')
-        patched = content.gsub(
-          /^(#elif defined\(__cpp_consteval\)\n#  define FMT_USE_CONSTEVAL) 1/,
-          "// Xcode 26 workaround: disable consteval\n\\1 0"
-        )
-        if patched != content
-          File.chmod(0644, fmt_base)
-          File.write(fmt_base, patched)
-        end
-      end
-    end
-
     installer.pods_project.targets.each do |target|
       if target.name == "React-Core.common-RCTI18nStrings"
         target.remove_from_project
+      end
+
+      target.build_configurations.each do |config|
+        current = config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']
+        next unless current
+
+        if Gem::Version.new(current) < minimum_ios
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] =
+            minimum_ios.to_s
+        end
       end
     end
 

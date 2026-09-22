@@ -73,6 +73,10 @@ describe('chart utils', () => {
       expect(chartXDomain([1000, 2000, 3000])).toEqual({ x: [1000, 3000] });
     });
 
+    it('returns undefined when x domain has no tick values', () => {
+      expect(chartXDomain([])).toBeUndefined();
+    });
+
     it('uses fixed y domains for percentage and precipitation charts', () => {
       expect(chartYDomain([12, 80], 'humidity')).toEqual({ y: [0, 100] });
       expect(chartYDomain([0.2, 0.7], 'visCloud')).toEqual({ y: [0, 1] });
@@ -102,6 +106,23 @@ describe('chart utils', () => {
       expect(secondaryYDomainForWeatherChart([1, 2], { x: [1, 2] })).toEqual({
         y: [0, 10],
       });
+    });
+
+    it('uses a safe secondary domain for missing or invalid values', () => {
+      expect(secondaryYDomainForWeatherChart([], { y: [-10, 20] })).toEqual({
+        y: [0, 10],
+      });
+      expect(
+        secondaryYDomainForWeatherChart([null, NaN, Infinity], {
+          y: [-10, 20],
+        })
+      ).toEqual({ y: [0, 10] });
+    });
+
+    it('uses a safe secondary domain for an invalid temperature domain', () => {
+      expect(
+        secondaryYDomainForWeatherChart([1, 2], { y: [0, 1] })
+      ).toEqual({ y: [0, 10] });
     });
 
     it('calculates temperature tick count from divisible domain range', () => {
@@ -152,6 +173,10 @@ describe('chart utils', () => {
   describe('tick formatting', () => {
     it('capitalizes the first character', () => {
       expect(capitalize('monday')).toBe('Monday');
+    });
+
+    it('returns an empty string when given an empty string', () => {
+      expect(capitalize('')).toBe('');
     });
 
     it('formats daily and midnight ticks with weekday and date', () => {

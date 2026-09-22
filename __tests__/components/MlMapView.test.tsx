@@ -10,6 +10,7 @@ const mockSelectTimeZone = jest.fn((state: any) => state.mock.timezone);
 const mockSelectDisplayLocation = jest.fn((state: any) => state.mock.displayLocation);
 const mockSelectOverlay = jest.fn((state: any) => state.mock.overlay);
 const mockSelectActiveOverlay = jest.fn((state: any) => state.mock.activeOverlay);
+const mockSelectSessionId = jest.fn((state: any) => state.mock.sessionId);
 const mockUpdateOverlays = jest.fn((...args: any[]) => ({
   type: 'MAP/UPDATE_OVERLAYS',
   payload: { overlayId: args[0], library: args[1] },
@@ -19,6 +20,8 @@ const mockGetDistance = jest.fn();
 const mockUseIsFocused = jest.fn();
 const mockUseReloader = jest.fn();
 const mockConfigGet = jest.fn();
+const mockAddHeader = jest.fn();
+const mockRemoveHeader = jest.fn();
 const mockWMSOverlay = jest.fn((props) => (
   <Text testID={`wms-overlay-${props.library}`}>wms</Text>
 ));
@@ -50,6 +53,10 @@ jest.mock('@store/map/selectors', () => ({
   selectDisplayLocation: (state: any) => mockSelectDisplayLocation(state),
   selectOverlay: (state: any) => mockSelectOverlay(state),
   selectActiveOverlay: (state: any) => mockSelectActiveOverlay(state),
+}));
+
+jest.mock('@store/settings/selectors', () => ({
+  selectSessionId: (state: any) => mockSelectSessionId(state),
 }));
 
 jest.mock('@store/map/actions', () => ({
@@ -147,6 +154,10 @@ jest.mock('@maplibre/maplibre-react-native', () => {
     Map,
     Camera,
     ViewAnnotation,
+    TransformRequestManager: {
+      addHeader: (...args: any[]) => mockAddHeader(...args),
+      removeHeader: (...args: any[]) => mockRemoveHeader(...args),
+    },
   };
 });
 
@@ -185,6 +196,10 @@ describe('MlMapView', () => {
     });
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('dispatches overlay update and renders WMS overlay after style is ready', async () => {
     const store = createStore({
       mock: {
@@ -193,6 +208,7 @@ describe('MlMapView', () => {
         overlay: { type: 'WMS', step: 60 },
         activeOverlay: 3,
         timezone: 'Europe/Helsinki',
+        sessionId: 1234567,
       },
     });
 
@@ -209,6 +225,12 @@ describe('MlMapView', () => {
     );
 
     expect(mockUpdateOverlays).toHaveBeenCalledWith(3, 'maplibre');
+    expect(mockAddHeader).toHaveBeenCalledWith({
+      id: 'smartmet-session-cookie',
+      match: '(?i)(?:[?&])request=GetMap(?:&|$)',
+      name: 'Cookie',
+      value: 'smartmet-session-id=1234567',
+    });
 
     await act(async () => {
       lastMapProps.onDidFinishLoadingStyle();
@@ -225,6 +247,53 @@ describe('MlMapView', () => {
     });
   });
 
+  it('updates overlays when the update interval has elapsed', () => {
+    jest
+      .spyOn(Date, 'now')
+      .mockReturnValueOnce(1_000_000)
+      .mockReturnValueOnce(1_000_000)
+      .mockReturnValue(1_060_000);
+    mockConfigGet.mockImplementation((key: string) => {
+      if (key === 'map') {
+        return {
+          updateInterval: 1,
+          baseMap: {
+            url: 'https://maps.example/',
+            darkStyle: 'dark',
+            lightStyle: 'light',
+          },
+        };
+      }
+      if (key === 'location') {
+        return { default: { lat: 60.1699, lon: 24.9384 } };
+      }
+      return {};
+    });
+
+    const store = createStore({
+      mock: {
+        currentLocation: undefined,
+        displayLocation: false,
+        overlay: { type: 'WMS', step: 60 },
+        activeOverlay: 3,
+        timezone: 'Europe/Helsinki',
+        sessionId: 1234567,
+      },
+    });
+
+    render(
+      <Provider store={store as any}>
+        <MlMapView
+          infoSheetRef={{ current: null }}
+          mapLayersSheetRef={{ current: null }}
+        />
+      </Provider>
+    );
+
+    expect(mockUpdateOverlays).toHaveBeenCalledTimes(2);
+    expect(mockUpdateOverlays).toHaveBeenLastCalledWith(3, 'maplibre');
+  });
+
   it('passes bounds to timeseries overlay and wires map controls actions', async () => {
     mockGetDistance.mockReturnValue(15000);
 
@@ -235,6 +304,7 @@ describe('MlMapView', () => {
         overlay: { type: 'Timeseries', step: 60 },
         activeOverlay: 3,
         timezone: 'Europe/Helsinki',
+        sessionId: 1234567,
       },
     });
 
@@ -301,5 +371,31 @@ describe('MlMapView', () => {
       'Map',
       'Open info panel'
     );
+  });
+
+  it('removes the WMS session cookie header on unmount', () => {
+    const store = createStore({
+      mock: {
+        currentLocation: { lat: 60.1699, lon: 24.9384 },
+        displayLocation: true,
+        overlay: undefined,
+        activeOverlay: undefined,
+        timezone: 'Europe/Helsinki',
+        sessionId: 7654321,
+      },
+    });
+
+    const { unmount } = render(
+      <Provider store={store as any}>
+        <MlMapView
+          infoSheetRef={{ current: null }}
+          mapLayersSheetRef={{ current: null }}
+        />
+      </Provider>
+    );
+
+    unmount();
+
+    expect(mockRemoveHeader).toHaveBeenCalledWith('smartmet-session-cookie');
   });
 });

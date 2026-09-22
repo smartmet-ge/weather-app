@@ -63,6 +63,10 @@
 	<string>Location service is used to deliver weather data for your current location. Location information is not passed to any 3rd parties.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location service is used to deliver weather data for your current location. Location information is not passed to any 3rd parties.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Motion data may be used to improve location tracking.</string>
+	<key>NSNotificationsUsageDescription</key>
+	<string>Notifications are used to deliver weather alerts.</string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
 	<key>UIAppFonts</key>

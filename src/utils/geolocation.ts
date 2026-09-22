@@ -10,7 +10,9 @@ let initializedLanguage: string | undefined;
 const normalizeText = (value: string) =>
   value
     .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
+    .replace(/(\p{Script=Latin})\p{M}+/gu, '$1')
+    .normalize('NFC')
+    .replace(/[’ʼ՚]/gu, "'")
     .toLowerCase();
 
 const countryByCode = (countries as Country[]).reduce<Record<string, Country>>(

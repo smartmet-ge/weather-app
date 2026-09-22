@@ -1,7 +1,4 @@
-import {
-  GeoJsonPosition,
-  simplifyPolygon,
-} from '@utils/simplifyPolygon';
+import { GeoJsonPosition, simplifyPolygon } from '@utils/simplifyPolygon';
 
 export const parseCapPolygon = (
   polygon: string,
@@ -21,6 +18,15 @@ export const parseCapPolygon = (
       const longitude = Number(parts[1]);
 
       if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+        return validPositions;
+      }
+
+      const previousPosition = validPositions[validPositions.length - 1];
+      if (
+        previousPosition &&
+        previousPosition[0] === longitude &&
+        previousPosition[1] === latitude
+      ) {
         return validPositions;
       }
 

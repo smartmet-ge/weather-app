@@ -6,13 +6,26 @@ jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock')
 );
 
-jest.mock('@react-native-community/geolocation', () => ({
-  getCurrentPosition: jest.fn(),
-  watchPosition: jest.fn(),
-  clearWatch: jest.fn(),
-  stopObserving: jest.fn(),
-  requestAuthorization: jest.fn(),
-  setRNConfiguration: jest.fn(),
+jest.mock('react-native-config', () => ({
+  __esModule: true,
+  default: {
+    UNIT_TEMPERATURE: '1',
+    UNIT_PRECIPITATION: '1',
+    UNIT_WIND: '1',
+    UNIT_PRESSURE: '1',
+  },
+}));
+
+jest.mock('react-native-nitro-geolocation/compat', () => ({
+  __esModule: true,
+  default: {
+    getCurrentPosition: jest.fn(),
+    watchPosition: jest.fn(),
+    clearWatch: jest.fn(),
+    stopObserving: jest.fn(),
+    requestAuthorization: jest.fn(),
+    setRNConfiguration: jest.fn(),
+  },
 }));
 
 jest.mock('react-native-localize', () => ({

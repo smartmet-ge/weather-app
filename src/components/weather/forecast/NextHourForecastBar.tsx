@@ -24,6 +24,7 @@ import {
 import { setCurrentLocation as setCurrentLocationAction } from '@store/location/actions';
 import { TimeStepData } from '@store/forecast/types';
 import { REGULAR_FONT, BOLD_FONT } from '@assets/constants';
+import { numericOrDash } from '@utils/number';
 
 const mapStateToProps = (state: State) => ({
   units: selectUnits(state),
@@ -67,9 +68,6 @@ const NextHourForecastBar: React.FC<NextHourForecastBarProps> = ({
     units?.precipitation.unitAbb ?? defaultUnits.precipitation;
 
   const currentTime = moment.unix(forecast.epochtime);
-  const numericOrDash = (val: string | undefined | null): string =>
-    val && !Number.isNaN(val) ? val : '-';
-
   const convertValue = (
     unit: string,
     unitAbb: string,
@@ -178,7 +176,7 @@ const NextHourForecastBar: React.FC<NextHourForecastBarProps> = ({
                   precipitationUnit
                 )}`
               )}`}>
-              <Text style={[styles.bold]}>{`${
+              <Text style={[styles.text, styles.bold]}>{`${
                 precipitationValue?.replace('.', decimalSeparator) ||
                 (0).toFixed(1).replace('.', decimalSeparator)
               }`}</Text>
@@ -195,7 +193,7 @@ const NextHourForecastBar: React.FC<NextHourForecastBarProps> = ({
               value: numericOrDash(forecast.uvCumulated?.toString()),
             })}>
             {'UV '}
-            <Text style={[styles.bold]}>
+            <Text style={[styles.text, styles.bold]}>
               {numericOrDash(forecast.uvCumulated?.toString())}
             </Text>
           </Text>
@@ -217,7 +215,7 @@ const NextHourForecastBar: React.FC<NextHourForecastBarProps> = ({
                 { color: textColor },
               ]}>
               {t('feelsLike')}{' '}
-              <Text>
+              <Text style={styles.text}>
                 {numericOrDash(feelsLikeValue)}
               </Text>
               <Text>{`°${t(`unitAbbreviations:${temperatureUnit}`)}`}</Text>

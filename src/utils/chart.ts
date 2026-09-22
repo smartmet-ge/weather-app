@@ -8,9 +8,13 @@ import { Config } from '@config';
 import { ClockType, UnitMap } from '@store/settings/types';
 import moment from 'moment';
 
-export const chartXDomain = (tickValues: number[]): ChartDomain => ({
-  x: [tickValues[0], tickValues[tickValues.length - 1]],
-});
+export const chartXDomain = (
+  tickValues: number[]
+): ChartDomain | undefined => {
+  if (tickValues.length === 0) return undefined;
+
+  return { x: [tickValues[0], tickValues[tickValues.length - 1]] };
+};
 
 export const chartYDomain = (
   minMax: ChartMinMax,
@@ -76,10 +80,15 @@ export const secondaryYDomainForWeatherChart = (
     return { y: [0, 10] };
   }
 
-  const tickCount = calculateTemperatureTickCount(temperatureDomain);
   const values: number[] = minMax.filter(
-    (v): v is number => v !== undefined && v !== null
+    (v): v is number => typeof v === 'number' && Number.isFinite(v)
   );
+  const tickCount = calculateTemperatureTickCount(temperatureDomain);
+
+  if (values.length === 0 || !Number.isFinite(tickCount) || tickCount <= 0) {
+    return { y: [0, 10] };
+  }
+
   let max = Math.ceil(Math.max(...values));
 
   while (max < 5 || max % tickCount !== 0) {
@@ -154,8 +163,8 @@ export const dailyChartTickValues = (days: number) => {
   return tickValues.sort((a, b) => a - b);
 };
 
-export const capitalize = ([first, ...rest]: string) =>
-  first.toUpperCase() + rest.join('');
+export const capitalize = (value: string) =>
+  value ? value[0].toUpperCase() + value.slice(1) : '';
 
 export const tickFormat = (
   tick: any,
