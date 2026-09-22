@@ -21,6 +21,7 @@ import {
 } from '@store/forecast/selectors';
 import { selectTimeZone, selectCurrent } from '@store/location/selector';
 import { selectUnits } from '@store/settings/selectors';
+import { useIsRunningOnMac } from '@components/common/MacContentSizeContext';
 import { selectIsAuroraBorealisLikely } from '@store/forecast/selectors';
 import { weatherBackgroundGetter } from '@assets/images/backgrounds';
 
@@ -42,7 +43,8 @@ import NextHourForecastBar from './forecast/NextHourForecastBar';
 import Text from '@components/common/AppText';
 import { trackMatomoEvent } from '@utils/matomo';
 import type { WeatherStackParamList } from '@navigators/stacks/types';
-import { LIGHT_FONT, REGULAR_FONT, BOLD_FONT } from '@assets/constants';
+import { LIGHT_FONT, REGULAR_FONT, BOLD_FONT, MAC_CONTENT_SIZE_MULTIPLIER } from '@assets/constants';
+import { numericOrDash } from '@utils/number';
 
 const mapStateToProps = (state: State) => ({
   loading: selectLoading(state),
@@ -80,6 +82,7 @@ const NextHourForecastPanelWithWeatherBackground: React.FC<NextHourForecastPanel
     moment.tz.setDefault(timezone);
   }, [timezone]);
 
+  const isRunningOnMac = useIsRunningOnMac();
   const navigation = useNavigation<NavigationProp<WeatherStackParamList>>();
   const insets = useSafeAreaInsets();
   const { width, fontScale } = useWindowDimensions();
@@ -106,9 +109,6 @@ const NextHourForecastPanelWithWeatherBackground: React.FC<NextHourForecastPanel
   const defaultUnits = Config.get('settings').units;
   const temperatureUnit =
     units?.temperature.unitAbb ?? defaultUnits.temperature;
-
-  const numericOrDash = (val: string | undefined | null): string =>
-    val && !Number.isNaN(val) ? val : '-';
 
   const convertValue = (
     unit: string,
@@ -155,7 +155,7 @@ const NextHourForecastPanelWithWeatherBackground: React.FC<NextHourForecastPanel
   const imageOverlayColor = 'rgba(0,0,0,0.3)';
   const largeFonts = fontScale >= 1.5;
   const contentHeight = largeFonts ? 600 : 420;
-  const iconSize = Math.min(fontScale * 22, 44);
+  const iconSize = Math.min(isRunningOnMac ? fontScale * MAC_CONTENT_SIZE_MULTIPLIER * 22 : fontScale * 22, 44);
   const accessibleHeaderLabel =
     `${t('nextHourForecastDescription')} ${t(`symbols:${smartSymbol.toString()}`)} 
       ${formatAccessibleTemperature(temperatureValue, t)} 

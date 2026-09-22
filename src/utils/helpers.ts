@@ -1,12 +1,12 @@
 import { Alert, AccessibilityInfo, Platform } from 'react-native';
-import Geolocation from '@react-native-community/geolocation';
+import Geolocation from 'react-native-nitro-geolocation/compat';
 import {
   PERMISSIONS,
   checkMultiple,
   request,
   RESULTS,
 } from 'react-native-permissions';
-import { TFunction } from 'react-i18next';
+import { TFunction } from 'i18next';
 
 import { Location } from '@store/location/types';
 import {
@@ -24,13 +24,17 @@ import { UnitMap } from '@store/settings/types';
 import { trackMatomoEvent } from './matomo';
 import { findNearestLocation, getCountryName } from './geolocation';
 import i18n from '@i18n';
+import { isRunningInIOSCompatibilityMode } from './iosCompatibilityMode';
+import { roundCoordinates } from './number';
 
-const getPosition = (
+const getPosition = async (
   callback: (arg0: Location, arg1: boolean) => void,
   t: TFunction<string[] | string>
-) =>
+) => {
+  const isRunningOnMac = await isRunningInIOSCompatibilityMode();
+
   Geolocation.getCurrentPosition(
-    (position) => {
+    (position: { coords: { latitude: number; longitude: number } }) => {
       let { latitude, longitude } = position.coords;
       latitude = roundCoordinates(latitude);
       longitude = roundCoordinates(longitude);
@@ -98,11 +102,12 @@ const getPosition = (
       console.log('GEOLOCATION NOT AVAILABLE', error);
     },
     {
-      enableHighAccuracy: Platform.OS === 'ios', // iOS only
+      enableHighAccuracy: Platform.OS === 'ios' && !isRunningOnMac, // iOS only
       timeout: 15000,
       maximumAge: 60000,
     }
   );
+};
 
 const alertNoPermission = (t: TFunction<string[] | string>) =>
   Alert.alert(
@@ -152,14 +157,18 @@ export const getGeolocation = async (
           getPosition(callback, t);
         }
         if (res === RESULTS.BLOCKED) {
-          trackMatomoEvent('Notice', 'Geolocation', 'COARSE_LOCATION_NO_PERMISSION');
+          trackMatomoEvent(
+            'Notice',
+            'Geolocation',
+            'COARSE_LOCATION_NO_PERMISSION'
+          );
           alertNoPermission(t);
         }
       })
       .catch((e) => {
         // TODO: is this a good way to handle error message?
         trackMatomoEvent('Error', 'Geolocation', e.message);
-        console.error(e)
+        console.error(e);
       });
   }
   if (!failSilently && values.every((value) => value === RESULTS.BLOCKED)) {
@@ -219,17 +228,6 @@ export const getWindDirection = (dataValue: number | undefined): number => {
   return direction;
 };
 
-type DotOrComma = ',' | '.';
-
-export const toStringWithDecimal = (
-  input: number | undefined,
-  separator: DotOrComma
-): string => {
-  if (Number.isNaN(input) || input === 0 || !input) return `0${separator}0`;
-  if (Number.isInteger(input)) return `${input}${separator}0`;
-  return input.toString().replace('.', separator);
-};
-
 const minusParams = [
   'temperature',
   'dewPoint',
@@ -259,7 +257,7 @@ export const getObservationCellValue = (
   divider?: number,
   showUnit?: boolean,
   decimalSeparator: ',' | '.' = ',',
-  t?: (key: string) => string,
+  t?: (key: string) => string
 ): string => {
   const unitAbb = unit.replace('°', ''); // get rid of ° in temperature units
   const unitParameterObject = UNITS.find((x) =>
@@ -288,7 +286,10 @@ export const getObservationCellValue = (
       : Number(value).toFixed(decimals || 0)
     )
       .toString()
-      .replace('.', decimalSeparator)} ${showUnit ? translatedUnit : ''}`.trim();
+      .replace(
+        '.',
+        decimalSeparator
+      )} ${showUnit ? translatedUnit : ''}`.trim();
   }
   return '-';
 };
@@ -327,20 +328,26 @@ export const getParameterUnit = (
     Config.get('settings').units;
   switch (param) {
     case 'precipitation1h':
-      return t ? t(units?.precipitation.unitAbb ?? precipitation) : units?.precipitation.unitAbb ?? precipitation;
+      return t
+        ? t(units?.precipitation.unitAbb ?? precipitation)
+        : (units?.precipitation.unitAbb ?? precipitation);
     case 'precipitationIntensity':
     case 'ri_10min':
-      return `${t ? t(units?.precipitation.unitAbb ?? precipitation) : units?.precipitation.unitAbb ?? precipitation}/h`
+      return `${t ? t(units?.precipitation.unitAbb ?? precipitation) : (units?.precipitation.unitAbb ?? precipitation)}/h`;
     case 'humidity':
       return '%';
     case 'temperature':
     case 'dewPoint':
-      return t ? `°${ t(units?.temperature.unitAbb ?? temperature) }` : `°${ units?.temperature.unitAbb ?? temperature}`;
+      return t
+        ? `°${t(units?.temperature.unitAbb ?? temperature)}`
+        : `°${units?.temperature.unitAbb ?? temperature}`;
     case 'windSpeedMS':
     case 'windGust':
-      return t ? t(units?.wind.unitAbb ?? wind) : units?.wind.unitAbb ?? wind;
+      return t ? t(units?.wind.unitAbb ?? wind) : (units?.wind.unitAbb ?? wind);
     case 'pressure':
-      return t ? t(units?.pressure.unitAbb ?? pressure) : units?.pressure.unitAbb ?? pressure;
+      return t
+        ? t(units?.pressure.unitAbb ?? pressure)
+        : (units?.pressure.unitAbb ?? pressure);
     case 'visibility':
       return 'km';
     case 'snowDepth':
@@ -356,7 +363,8 @@ export const getParameterUnit = (
 
 export const formatAccessibleTemperature = (
   val: string | number | undefined | null,
-  t: (key: string) => string): string  => {
+  t: (key: string) => string
+): string => {
   if (val === null || val === undefined || val === '') return '-';
 
   const num = Number(val);
@@ -365,7 +373,7 @@ export const formatAccessibleTemperature = (
   const valuePart =
     num < 0 ? `${t('forecast:minus')} ${Math.abs(num)}` : `${num}`;
   return `${valuePart}`;
-}
+};
 
 // https://gist.github.com/johndyer/0dffbdd98c2046f41180c051f378f343
 const getEaster = (year: number): Date => {
@@ -473,7 +481,7 @@ export const getSeveritiesForTimePeriod = (
     })
     .map((warning) => {
       const info = Array.isArray(warning.info) ? warning.info[0] : warning.info;
-      return severities.indexOf(info.severity) + 1
+      return severities.indexOf(info.severity) + 1;
     });
 
   const maxSeverity = Math.max(
@@ -499,7 +507,12 @@ export const getSeveritiesForDays = (
     daySeverities.push(
       Math.max(
         0,
-        getSeveritiesForTimePeriod(warnings, startMomentObject, endMomentObject, timezone)
+        getSeveritiesForTimePeriod(
+          warnings,
+          startMomentObject,
+          endMomentObject,
+          timezone
+        )
       )
     );
 
@@ -508,7 +521,12 @@ export const getSeveritiesForDays = (
     daySeverities.push(
       Math.max(
         0,
-        getSeveritiesForTimePeriod(warnings, startMomentObject, endMomentObject, timezone)
+        getSeveritiesForTimePeriod(
+          warnings,
+          startMomentObject,
+          endMomentObject,
+          timezone
+        )
       )
     );
 
@@ -518,7 +536,12 @@ export const getSeveritiesForDays = (
     daySeverities.push(
       Math.max(
         0,
-        getSeveritiesForTimePeriod(warnings, startMomentObject, endMomentObject, timezone)
+        getSeveritiesForTimePeriod(
+          warnings,
+          startMomentObject,
+          endMomentObject,
+          timezone
+        )
       )
     );
 
@@ -528,7 +551,12 @@ export const getSeveritiesForDays = (
     daySeverities.push(
       Math.max(
         0,
-        getSeveritiesForTimePeriod(warnings, startMomentObject, endMomentObject, timezone)
+        getSeveritiesForTimePeriod(
+          warnings,
+          startMomentObject,
+          endMomentObject,
+          timezone
+        )
       )
     );
 
@@ -537,47 +565,48 @@ export const getSeveritiesForDays = (
   return dailySeverities;
 };
 
-// Rounds coordinates to maximum 4 decimal places
-export const roundCoordinates = (value: number): number => {
-  const stringValue = value.toString();
-  const items = stringValue.split('.');
+export const uppercaseFirst = (str: string) =>
+  str ? str[0].toUpperCase() + str.slice(1) : '';
 
-  // Return original value if maximum 4 decimal places
-  if (items.length === 2 && items[1].length <= 4) return value;
-
-  return +(Math.round(parseFloat(value + 'e+4')) + 'e-4');
-};
-
-export const uppercaseFirst = (str: string) => str ? str[0].toUpperCase() + str.slice(1) : '';
-
-export const selectCapInfoByLanguage = (infos: Array<CapInfo>, language: string):CapInfo => {
+export const selectCapInfoByLanguage = (
+  infos: Array<CapInfo>,
+  language: string
+): CapInfo => {
   const info = infos.find((item) => {
     const [l] = item.language.split('-');
     return l === language;
   });
 
   if (info) {
-    return info
+    return info;
   }
   return infos[0];
-}
-
-export function roundToNearestTen(n: number): number {
-  const r = Math.round(n / 10) * 10;
-  return Object.is(r, -0) ? 0 : r; // normalize -0 -> 0
-}
+};
 
 export const msToBeaufort = (speed: number): number => {
   const thresholds = [
-    0.3, 1.6, 3.4, 5.5, 8, 10.8,
-    13.9, 17.2, 20.8, 24.5, 28.5,
-    32.7, Infinity,
+    0.3,
+    1.6,
+    3.4,
+    5.5,
+    8,
+    10.8,
+    13.9,
+    17.2,
+    20.8,
+    24.5,
+    28.5,
+    32.7,
+    Infinity,
   ];
 
   return thresholds.findIndex((limit) => speed < limit);
 };
 
-export const formatAccessibleDate = (m: moment.Moment, includeYear = true): string => {
+export const formatAccessibleDate = (
+  m: moment.Moment,
+  includeYear = true
+): string => {
   return m.format(includeYear ? 'dddd, LL' : 'dddd, D. MMMM');
 };
 
@@ -589,8 +618,13 @@ export const formatAccessibleDateTime = (
 ): string => {
   const datePart = m.format(includeYear ? 'dddd, LL' : 'dddd, D. MMMM');
 
-  if (is24Hour) return datePart+' '+m.format('H:mm');
+  if (is24Hour) return datePart + ' ' + m.format('H:mm');
 
-  return datePart+' '+m.format('h:mm ')+' '
-          +(m.hours() >= 12 ? t('time:pmSpoken') : t('time:amSpoken'));
+  return (
+    datePart +
+    ' ' +
+    m.format('h:mm ') +
+    ' ' +
+    (m.hours() >= 12 ? t('time:pmSpoken') : t('time:amSpoken'))
+  );
 };

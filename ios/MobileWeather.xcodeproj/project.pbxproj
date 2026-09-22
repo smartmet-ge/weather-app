@@ -22,6 +22,8 @@
 		A4CDDC8C280007F400D84935 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4CDDC8E280007F400D84935 /* InfoPlist.strings */; };
 		AF2CB2F4800B89C89592A7FB /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9629DD67B904687D291DE4B6 /* PrivacyInfo.xcprivacy */; };
 		BFD98EF8D9DDD60D677C76DE /* libPods-MobileWeather.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 974E3F089372FFCFD0AECBEB /* libPods-MobileWeather.a */; };
+		F10000012F00000000000001 /* IOSCompatibilityMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000032F00000000000003 /* IOSCompatibilityMode.swift */; };
+		F10000022F00000000000002 /* IOSCompatibilityModeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F10000042F00000000000004 /* IOSCompatibilityModeBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -93,6 +95,8 @@
 		E635203A5C2F9B8574FD76C3 /* libPods-WidgetExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WidgetExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F10000032F00000000000003 /* IOSCompatibilityMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSCompatibilityMode.swift; sourceTree = "<group>"; };
+		F10000042F00000000000004 /* IOSCompatibilityModeBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IOSCompatibilityModeBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -157,6 +161,8 @@
 				A454032A25E66E860005997E /* MobileWeather-Bridging-Header.h */,
 				9629DD67B904687D291DE4B6 /* PrivacyInfo.xcprivacy */,
 				A292E7552D5F16C000DC288E /* AppDelegate.swift */,
+				F10000032F00000000000003 /* IOSCompatibilityMode.swift */,
+				F10000042F00000000000004 /* IOSCompatibilityModeBridge.m */,
 			);
 			path = MobileWeather;
 			sourceTree = "<group>";
@@ -283,6 +289,7 @@
 				92C4390534123651C377CBF9 /* [CP] Copy Pods Resources */,
 				A2E2E9A12CFDF6070096E794 /* Embed Foundation Extensions */,
 				A2D35D032F8CBD2200F66919 /* ShellScript */,
+				95F457F572F6E805DFF217FD /* [MapLibre React Native] Remove MapLibre.xcframework-ios.signature */,
 			);
 			buildRules = (
 			);
@@ -401,6 +408,7 @@
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/React-Core_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact/React-cxxreact_privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-timing/React-timing_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -430,12 +438,32 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-Core_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-cxxreact_privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-timing_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SDWebImage.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MobileWeather/Pods-MobileWeather-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		95F457F572F6E805DFF217FD /* [MapLibre React Native] Remove MapLibre.xcframework-ios.signature */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[MapLibre React Native] Remove MapLibre.xcframework-ios.signature";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -rf \"$CONFIGURATION_BUILD_DIR/MapLibre.xcframework-ios.signature\"";
 		};
 		A2D35D032F8CBD2200F66919 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -526,6 +554,8 @@
 			files = (
 				A292E7562D5F16C000DC288E /* AppDelegate.swift in Sources */,
 				A454032C25E66E860005997E /* SwiftEnabler.swift in Sources */,
+				F10000012F00000000000001 /* IOSCompatibilityMode.swift in Sources */,
+				F10000022F00000000000002 /* IOSCompatibilityModeBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,6 +727,7 @@
 					"-DRCT_REMOVE_LEGACY_ARCH=1",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
+				PODFILE_DIR = "$(SRCROOT)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -776,6 +807,7 @@
 					"-DRCT_REMOVE_LEGACY_ARCH=1",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
+				PODFILE_DIR = "$(SRCROOT)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -815,7 +847,7 @@
 			repositoryURL = "https://github.com/maplibre/maplibre-gl-native-distribution";
 			requirement = {
 				kind = exactVersion;
-				version = 6.25.0;
+				version = 6.26.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

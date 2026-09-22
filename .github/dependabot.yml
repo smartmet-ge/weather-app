@@ -14,7 +14,6 @@ updates:
     versioning-strategy: "increase"
     labels:
       - "dependencies"
-      - "javascript"
     groups:
       npm-minor-and-patch:
         update-types:
@@ -25,11 +24,28 @@ updates:
         update-types:
           - "version-update:semver-major"
           - "version-update:semver-minor"
+      # Keep React Native presets and configs on the same minor as React Native.
+      - dependency-name: "@react-native/*"
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
       - dependency-name: "react"
         update-types:
           - "version-update:semver-major"
           - "version-update:semver-minor"
+          - "version-update:semver-patch"
       - dependency-name: "react-test-renderer"
         update-types:
           - "version-update:semver-major"
           - "version-update:semver-minor"
+          - "version-update:semver-patch"
+      # React Native 0.85.x Jest preset depends on the Jest 29 environment.
+      - dependency-name: "jest"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "jest-circus"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "@types/jest"
+        update-types:
+          - "version-update:semver-major"
